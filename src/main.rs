@@ -11,6 +11,8 @@ mod store;
 
 #[tokio::main]
 async fn main() -> Result<(), Box<dyn Error>> {
+    console_subscriber::init();
+
     let socket = SocketAddr::from(([0, 0, 0, 0], 8080));
     let listener = TcpListener::bind(socket).await.unwrap();
     let (sender, receiver) = mpsc::channel::<Request>(32);
